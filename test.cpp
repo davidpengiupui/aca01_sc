@@ -13,6 +13,7 @@
 #include <bitset>
 #include <iomanip>
 #include "sim_cache.h"
+#include "Unit.h"
 
 using namespace std;
 
@@ -50,7 +51,7 @@ class Cache
         int num_sets, tag_bits, index_bits, offset_bits;
         int tag_mask, index_mask, offset_mask;
         
-        vector<vector<Line>> cache;
+        vector<vector<Unit>> cache;
 
         // instantiate an instance of a cache for a specified cache level
         /* 
