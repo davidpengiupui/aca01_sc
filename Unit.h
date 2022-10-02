@@ -13,4 +13,5 @@ class Unit
 
 
         Unit(int val, int dir, int tat, int adr, int luc);
+        void Print_Unit();
 };
