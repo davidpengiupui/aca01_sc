@@ -22,43 +22,6 @@ vector<int> access_stream_l1;
 vector<int> access_stream_l2;
 int silent = 0;
 
-class Line
-{
-    public:
-        int valid, dirty, tag, addr, lru_count = 0;
-
-        Line()
-        {
-            valid = 0;
-            dirty = 0;
-        }
-
-        Line(int v, int d, int t, int a)
-        {
-            valid = v;
-            dirty = d;
-            tag = t;
-            addr = a;
-        }
-
-        Line(int v, int d, int t, int a, int c)
-        {
-            valid = v;
-            dirty = d;
-            tag = t;
-            addr = a;
-            lru_count = c;
-        }
-};
-
-void Print_Line(const Line & l)
-{
-    cout << "valid: " << l.valid << endl;
-    cout << "dirty: " << l.dirty << endl;
-    cout << "tag: " << l.tag << endl;
-    cout << "addr: " << l.addr << endl;
-    cout << "lru_count: " << l.lru_count << endl;
-}
 
 void Print (const vector<int>& v){
   //vector<int> v;
