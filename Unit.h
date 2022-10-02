@@ -12,5 +12,5 @@ class Unit
         inr lru_count = 0;
 
 
-        Unit(int val, int dir, int tag, int adr, int luc);
+        Unit(int val, int dir, int tat, int adr, int luc);
 };
