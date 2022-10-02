@@ -285,7 +285,7 @@ class Cache
                 if (replacement == 0)
                 {
                     //Print_Line(cache[index][invalid_index]);
-                    cache[index][invalid_index] = Line(1, 1, tag, bit_address, lru_counter[index]++);
+                    cache[index][invalid_index] = Unit(1, 1, tag, bit_address, lru_counter[index]++);
                 }
 
                 // update Pseudo-LRU
@@ -293,13 +293,13 @@ class Cache
                 {
                     // since this is an access, update the tree bit array
                     trees[index].access(invalid_index);
-                    cache[index][invalid_index] = Line(1, 1, tag, bit_address);
+                    cache[index][invalid_index] = Unit(1, 1, tag, bit_address);
                 }
 
                 // no updates necessary for optimal, just write to the block
                 else if (replacement == 2)
                 {
-                    cache[index][invalid_index] = Line(1, 1, tag, bit_address);
+                    cache[index][invalid_index] = Unit(1, 1, tag, bit_address);
                 }
 
                 // for both non-inclusive and inclusive, issue a read to the next level 
@@ -391,12 +391,12 @@ class Cache
                 if (replacement == 0)
                 {
                     //cache[index][replacement_index] = Line(1, 0, tag, bit_address, lru_counter[index]++);
-                    cache[index][replacement_index] = Line(1, 0, tag, bit_address, lru_counter[index]);
+                    cache[index][replacement_index] = Unit(1, 0, tag, bit_address, lru_counter[index]);
                     lru_counter[index] += 1;
                 }
                 else
                 {
-                    cache[index][replacement_index] = Line(1, 0, tag, bit_address);
+                    cache[index][replacement_index] = Unit(1, 0, tag, bit_address);
                 }
 
                 // step 2 of allocating a block
