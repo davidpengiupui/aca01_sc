@@ -1,10 +1,3 @@
-/*
- * Author: Kobee Raveendran
- * CDA5106: Advanced Computer Architecture (Fall 2021)
- * Machine Problem 1 - Cache Simulator
- * University of Central Florida
- */
-
 #include <string>
 #include <unordered_map>
 #include <iomanip>
