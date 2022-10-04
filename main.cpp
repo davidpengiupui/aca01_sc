@@ -483,7 +483,8 @@ int main(int argc, char *argv[])
     // int inclusion = 0;
     string trace_name = argv[8];
     // string trace_name = "gcc_trace.txt";
-    string trace_path = "../traces/" + trace_name;
+    //string trace_path = "../traces/" + trace_name;
+    string trace_path = trace_name;
 
     if (argc > 9)
     {
