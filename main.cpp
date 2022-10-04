@@ -2,6 +2,7 @@
 #include "include/utils.h"
 #include "include/Pseudo_LRU.h"
 
+using namespace std;
 
 int graph = 0;
 int base = 2;
