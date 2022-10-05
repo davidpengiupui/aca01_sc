@@ -2,7 +2,6 @@
 #include "include/utils.h"
 #include "include/Pseudo_LRU.h"
 
-using namespace std;
 
 int graph = 0;
 int base = 2;
@@ -94,7 +93,7 @@ Cache::Cache(int level, int b_size, int cache_size, int cache_assoc, int rep_pol
         cache.resize(num_sets); // 32
         // cout << "cache size: " << cache.size() << endl;
 
-        if (replc_policy == 0 || replc_policy == 3)
+        if (replc_policy == 0 || replc_policy == 1)
         {
             // cout << "lru before replacement: " << endl;
             // Print(lru_counter); 0
@@ -102,7 +101,7 @@ Cache::Cache(int level, int b_size, int cache_size, int cache_assoc, int rep_pol
             // cout << "lru after replacement: " << endl;
             // Print(lru_counter); 32
         }
-        else if (replc_policy == 1)
+        else if (replc_policy == 100)
         {
             for (int i = 0; i < num_sets; i++)
             {
@@ -214,7 +213,7 @@ void Cache::access_cache(int32_t bit_address, string mode, int trace_index)
                     // Print_Line(cache[index][i]);
                 }
 
-                else if (replc_policy == 1)
+                else if (replc_policy == 100)
                     pseudo_lru_trees[idx].tree_access(i);
                 
 
@@ -240,7 +239,7 @@ void Cache::access_cache(int32_t bit_address, string mode, int trace_index)
             order_counts[idx] += 1;
         }
 
-        else if (replc_policy == 1)
+        else if (replc_policy == 100)
         {
             pseudo_lru_trees[idx].tree_access(sign_idx);
             cache[idx][sign_idx] = Unit(1, 1, tag, bit_address);
@@ -251,7 +250,7 @@ void Cache::access_cache(int32_t bit_address, string mode, int trace_index)
             cache[idx][sign_idx] = Unit(1, 1, tag, bit_address);
         }
 
-        else if (replc_policy == 3)
+        else if (replc_policy == 1)
         {
             // Print_Unit(cache[index][invalid_index]);
             cache[idx][sign_idx] = Unit(1, 1, tag, bit_address, order_counts[idx]);
@@ -273,7 +272,7 @@ void Cache::access_cache(int32_t bit_address, string mode, int trace_index)
         // miss & replace
         int replc_idx;
 
-        if (replc_policy == 0 || replc_policy == 3)
+        if (replc_policy == 0 || replc_policy == 1)
         {
             int min_count = INT32_MAX;
 
@@ -287,7 +286,7 @@ void Cache::access_cache(int32_t bit_address, string mode, int trace_index)
             }
         }
 
-        else if (replc_policy == 1)
+        else if (replc_policy == 100)
             replc_idx = pseudo_lru_trees[idx].tree_insert();
 
         else if (replc_policy == 2)
@@ -328,7 +327,7 @@ void Cache::access_cache(int32_t bit_address, string mode, int trace_index)
             }
         }
 
-        if (replc_policy == 0 || replc_policy == 3)
+        if (replc_policy == 0 || replc_policy == 1)
         {
             cache[idx][replc_idx] = Unit(1, 0, tag, bit_address, order_counts[idx]);
             order_counts[idx] += 1;
@@ -479,7 +478,7 @@ int main(int argc, char *argv[])
     // int inclusion = 0;
     string trace_name = argv[8];
     // string trace_name = "gcc_trace.txt";
-    // string trace_path = "../traces/" + trace_name;
+    //string trace_path = "../traces/" + trace_name;
     string trace_path = trace_name;
 
     if (argc > 9)
@@ -490,7 +489,7 @@ int main(int argc, char *argv[])
 
     // ******************************************************************************* //
     // sample execution command:
-    // ./sim_cache  16 1024 2 0 0 0 0 "../traces/gcc_trace.txt"
+    // ./sim_cache  16 1024 2 0 0 0 0 "gcc_trace.txt"
     // ******************************************************************************* //
 
     if (!graph)
@@ -510,7 +509,7 @@ int main(int argc, char *argv[])
             cout << "LRU";
             break;
 
-        case 1:
+        case 100:
             cout << "Pseudo-LRU";
             break;
 
@@ -518,7 +517,7 @@ int main(int argc, char *argv[])
             cout << "Optimal";
             break;
 
-        case 3:
+        case 1:
             cout << "FIFO";
             break;
 
