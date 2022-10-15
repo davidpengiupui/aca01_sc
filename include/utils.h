@@ -16,7 +16,7 @@ vector<int> optim_trace_file(string trace_file_path, int tag_shift_bits)
         string adr;
         int32_t bit_adr;
 
-        while (trace_file >> mode >> address)
+        while (trace_file >> mode >> adr)
         {
             if (!isalpha(mode[0])) 
                 mode = mode[mode.length() - 1];
